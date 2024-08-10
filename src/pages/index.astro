@@ -1,0 +1,95 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+---
+
+<Layout title="Welcome to Astro.">
+	<main>
+		<h1>WAX RAM <span class="text-gradient">Free</span></h1>
+		<p class="instructions">
+			Sometimes pack openings fail, this makes us sad. <strong>What makes us saderer</strong> is when this consumes our RAM on WAX. The <strong>good news</strong> is you can reclaim this RAM by cancelling these offers.
+		</p>
+		<ul role="list" class="link-card-grid">
+			<Card
+				href="/free-ram-now"
+				title="Free RAM Now!"
+				body="Simply go to the tool, login and click to let your RAM free."
+			/>
+			<Card
+				href="https://github.com/RichardSlater/wax-free-ram"
+				title="GitHub"
+				body="Something not right? Got a suggetion submit issues via GitHub"
+			/>
+			<Card
+				href="https://warsaken.cards/"
+				title="Warsaken Store"
+				body="Did you suddenly recover a lot of RAM, why not buy some Warsaken Packs"
+			/>
+			<Card
+				href="https://discord.gg/warsaken"
+				title="Community"
+				body="Join the amazing Warsaken Legion Discord community. ❤️"
+			/>
+		</ul>
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	.astro-a {
+		position: absolute;
+		top: -32px;
+		left: 50%;
+		transform: translatex(-50%);
+		width: 220px;
+		height: auto;
+		z-index: -1;
+	}
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1;
+		text-align: center;
+		margin-bottom: 1em;
+		text-transform: capitalize;
+	}
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+	.instructions {
+		margin-bottom: 2rem;
+		border: 1px solid rgba(var(--accent-light), 25%);
+		background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
+		padding: 1.5rem;
+		border-radius: 8px;
+	}
+	.instructions code {
+		font-size: 0.8em;
+		font-weight: bold;
+		background: rgba(var(--accent-light), 12%);
+		color: rgb(var(--accent-light));
+		border-radius: 4px;
+		padding: 0.3em 0.4em;
+	}
+	.instructions strong {
+		color: rgb(var(--accent-light));
+	}
+	.link-card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+		gap: 2rem;
+		padding: 0;
+	}
+</style>
