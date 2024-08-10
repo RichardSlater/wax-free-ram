@@ -13,7 +13,8 @@ import Layout from "../layouts/Layout.astro";
       </ol>
       <p>
         <strong>Important:</strong> Clicking <code>Free My RAM</code> will cancel
-        all pending offers older than 1 hour, this action is irreversable.
+        all pending offers from supported services (i.e. Warsaken) older than 1 hour,
+        this action is irreversable.
       </p>
     </div>
 
@@ -83,7 +84,7 @@ import Layout from "../layouts/Layout.astro";
             const payload = await apiResponse.json();
             const data = payload.data as Array<any>;
 
-			console.log(url);
+            console.log(url);
 
             if (data.length == 0) {
               document
@@ -101,14 +102,14 @@ import Layout from "../layouts/Layout.astro";
                 data: { offer_id: o.offer_id },
               }));
 
-			  const offersList = document.getElementById("offers");
-			  const offersListItems = data.map((o) => {
-				const li = document.createElement('li');
-				li.textContent = `${o.offer_id}: ${o.sender_name} → ${o.recipient_name} (${o.memo})`;
-				return li;
-			  });
+              const offersList = document.getElementById("offers");
+              const offersListItems = data.map((o) => {
+                const li = document.createElement("li");
+                li.textContent = `${o.offer_id}: ${o.sender_name} → ${o.recipient_name} (${o.memo})`;
+                return li;
+              });
 
-			  offersListItems.forEach(o => offersList?.appendChild(o));
+              offersListItems.forEach((o) => offersList?.appendChild(o));
 
               document
                 .querySelector(".freeRamButton")
@@ -201,6 +202,6 @@ import Layout from "../layouts/Layout.astro";
     padding: 1em;
   }
   #offers {
-	list-style-type: none;
+    list-style-type: none;
   }
 </style>
