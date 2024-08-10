@@ -79,7 +79,7 @@ import Layout from "../layouts/Layout.astro";
 
             const cutoff = Math.floor(new Date().getTime()) - 3600;
             const account = await session.actor;
-            const url = `${baseUrl}/atomicassets/v1/offers?recipient=warsaken&account=${account}&sender=${account}&state=0&before=${cutoff}`;
+            const url = `${baseUrl}/atomicassets/v1/offers?recipient=warsaken&account=${account}&sender=${account}&state=0,1,2&before=${cutoff}`;
             const apiResponse = await fetch(url);
             const payload = await apiResponse.json();
             const data = payload.data as Array<any>;
