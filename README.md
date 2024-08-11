@@ -16,7 +16,15 @@ Do this or it won't work, I'm talking to you future me.
 ## Develop
 
 ```
+pnp install
 pnp dev
+```
+
+or, if you have Podman or Docker installed:
+
+```
+docker build . -t wax-ram-free:latest
+docker run --publish 4321:4321 localhost/wax-ram-free
 ```
 
 ## Test-Buikd
