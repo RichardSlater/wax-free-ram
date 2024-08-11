@@ -19,13 +19,13 @@ import Layout from "../layouts/Layout.astro";
     </div>
 
     <div class="content state-start">
-      <div class="button-container">
+      <div class="center">
         <button class="connect">Connect Wallet</button>
       </div>
     </div>
 
-    <div class="content state-nothingTodo hidden">
-      <h1>No RAM for you</h1>
+    <div class="content state-nothingTodo hidden center">
+      <h2>No <span class="text-gradient">Free</span> RAM for you</h2>
       <p>
         It looks like you have done everything possible to free your RAM, good
         job.
@@ -42,7 +42,7 @@ import Layout from "../layouts/Layout.astro";
         that's approximately <span id="estRam" class="text-gradient">xxx</span> RAM
         you can recover:
       </p>
-      <div class="button-container">
+      <div class="center">
         <button class="freeRamButton">Free My RAM</button>
       </div>
       <ul id="offers">
@@ -58,7 +58,7 @@ import Layout from "../layouts/Layout.astro";
         click the button below to cancel all the offers; if required it will be
         broken into batches to reduce the chance of transactions failing.
       </p>
-      <div class="button-container">
+      <div class="center">
         <button class="freeRamButton">Free My RAM</button>
       </div>
     </div>
@@ -160,7 +160,7 @@ import Layout from "../layouts/Layout.astro";
   img {
     padding: 1em;
   }
-  .button-container {
+  .center {
     width: 100%;
     text-align: center;
   }
