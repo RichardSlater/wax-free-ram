@@ -1,5 +1,7 @@
 # WAX RAM Free
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/25725105-c7ea-4065-8cf5-3d920a4bd413/deploy-status)](https://app.netlify.com/sites/wax-free-ram/deploys)
+
 Tool to free up WAX blockchain RAM (a non-consumable resource) on the WAX Blockchain caused by failed pack openings:
 
 ![Screenshot](./public/screenshot.png)
