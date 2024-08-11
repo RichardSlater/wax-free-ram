@@ -18,11 +18,13 @@ import Layout from "../layouts/Layout.astro";
       </p>
     </div>
 
-    <div class="content">
-      <button class="connect">Connect Wallet</button>
+    <div class="content state-start">
+      <div class="button-container">
+        <button class="connect">Connect Wallet</button>
+      </div>
     </div>
 
-    <div class="content nothingTodo hidden">
+    <div class="content state-nothingTodo hidden">
       <h1>No RAM for you</h1>
       <p>
         It looks like you have done everything possible to free your RAM, good
@@ -33,94 +35,47 @@ import Layout from "../layouts/Layout.astro";
       </p>
     </div>
 
-    <div class="content freeRam hidden">
-      <h2>I want to break <span class="text-gradient">free</span></h2>
-      <p>Found some offers to remove:</p>
-      <ul id="offers"></ul>
-      <button class="freeRamButton">Free My RAM</button>
+    <div class="content state-freeRam hidden">
+      <h2><span class="text-gradient">free</span> your RAM!</h2>
+      <p>
+        Found <span id="countOffers" class="text-gradient">x</span> offers to remove,
+        that's approximately <span id="estRam" class="text-gradient">xxx</span> RAM
+        you can recover:
+      </p>
+      <div class="button-container">
+        <button class="freeRamButton">Free My RAM</button>
+      </div>
+      <ul id="offers">
+        <li>
+          <a
+            href="https://wax.atomichub.io/trading/trade-offer/wax-mainnet/167425050"
+            class="offer-link">167425050</a
+          >: scetrovplays → warsaken (Open Pack)
+        </li>
+      </ul>
+      <p>
+        You can open each offer on Atomic Hub and cancel it by hand, or you can
+        click the button below to cancel all the offers; if required it will be
+        broken into batches to reduce the chance of transactions failing.
+      </p>
+      <div class="button-container">
+        <button class="freeRamButton">Free My RAM</button>
+      </div>
     </div>
 
-    <script>
-      import { SessionKit } from "@wharfkit/session";
-      import { WebRenderer } from "@wharfkit/web-renderer";
-      import { WalletPluginAnchor } from "@wharfkit/wallet-plugin-anchor";
-      import { WalletPluginWombat } from "@wharfkit/wallet-plugin-wombat";
-      import { WalletPluginCloudWallet } from "@wharfkit/wallet-plugin-cloudwallet";
+    <div class="content state-broadcast hidden">
+      <h2>Setting RAM <span class="text-gradient">free</span></h2>
+      <p>Freeing RAM:</p>
+      <ul id="transactions"></ul>
+    </div>
 
-      const baseUrl = "https://wax.eosusa.io";
+    <div class="content state-error hidden">
+      <h2><span class="text-gradient">Error</span>, Sadge</h2>
+      <p>Whoops something went wrong</p>
+      <code id="errors"></code>
+    </div>
 
-      const webRenderer = new WebRenderer();
-
-      const sessionKit = new SessionKit({
-        appName: "WAX RAM Free",
-        chains: [
-          {
-            id: "1064487b3cd1a897ce03ae5b6a865651747e2e152090f99c1d19d44e01aea5a4",
-            url: "https://wax.greymass.com",
-          },
-        ],
-        ui: webRenderer,
-        walletPlugins: [
-          new WalletPluginAnchor(),
-          new WalletPluginWombat(),
-          new WalletPluginCloudWallet(),
-        ],
-      });
-
-      const buttons = document.querySelectorAll("button.connect");
-
-      buttons.forEach((button) => {
-        button.addEventListener("click", async () => {
-          const response = await sessionKit.login();
-          const session = response.session;
-
-          if (session) {
-            buttons.forEach((b) => b.classList.add("hidden"));
-
-            const cutoff = Math.floor(new Date().getTime()) - 3600;
-            const account = await session.actor;
-            const url = `${baseUrl}/atomicassets/v1/offers?recipient=warsaken&account=${account}&sender=${account}&state=0,1,2&before=${cutoff}`;
-            const apiResponse = await fetch(url);
-            const payload = await apiResponse.json();
-            const data = payload.data as Array<any>;
-
-            console.log(url);
-
-            if (data.length == 0) {
-              document
-                .querySelectorAll("div.nothingTodo")
-                .forEach((d) => d.classList.remove("hidden"));
-            } else {
-              document
-                .querySelectorAll("div.freeRam")
-                .forEach((d) => d.classList.remove("hidden"));
-
-              const cancelOffers = data.map((o) => ({
-                account: "atomicassets",
-                name: "canceloffer",
-                authorization: [session.permissionLevel],
-                data: { offer_id: o.offer_id },
-              }));
-
-              const offersList = document.getElementById("offers");
-              const offersListItems = data.map((o) => {
-                const li = document.createElement("li");
-                li.textContent = `${o.offer_id}: ${o.sender_name} → ${o.recipient_name} (${o.memo})`;
-                return li;
-              });
-
-              offersListItems.forEach((o) => offersList?.appendChild(o));
-
-              document
-                .querySelector(".freeRamButton")
-                ?.addEventListener("click", async () => {
-                  session.transact({ actions: cancelOffers });
-                });
-            }
-          }
-        });
-      });
-    </script>
+    <script src="../scripts/free-ram.ts"></script>
   </main>
 </Layout>
 
@@ -147,9 +102,9 @@ import Layout from "../layouts/Layout.astro";
     font-size: 4rem;
     font-weight: 700;
     line-height: 1;
-    text-align: center;
     margin-bottom: 1em;
     text-transform: uppercase;
+    text-align: center;
   }
   .text-gradient {
     background-image: var(--accent-gradient);
@@ -176,17 +131,18 @@ import Layout from "../layouts/Layout.astro";
     background-size: 400%;
     background-position: 0%;
     color: var(--accent-light);
-		border-radius: 7px;
-		background-position: 0%;
-		transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1), color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    border-radius: 7px;
+    background-position: 0%;
+    transition:
+      background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
   }
   button:is(:hover, :focus-within) {
-		background-position: 20%;
+    background-position: 20%;
     color: rgb(var(--accent-dark));
     box-shadow: 0px 0px 5px 5px rgb(var(--accent-dark));
-
-	}
+  }
   .instructions code {
     font-size: 0.8em;
     font-weight: bold;
@@ -201,14 +157,19 @@ import Layout from "../layouts/Layout.astro";
   .hidden {
     display: none;
   }
-  .content {
-    text-align: center;
-  }
-
   img {
     padding: 1em;
   }
-  #offers {
-    list-style-type: none;
+  .button-container {
+    width: 100%;
+    text-align: center;
+  }
+  #countOffers,
+  #estRam {
+    font-weight: 700;
+  }
+  :global(a.offer-link),
+  :global(a.transaction-link) {
+    color: rgb(var(--accent-light));
   }
 </style>
