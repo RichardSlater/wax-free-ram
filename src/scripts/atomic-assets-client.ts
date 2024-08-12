@@ -16,14 +16,14 @@ interface AtomicAssetOfferApiResponse {
     memo: string,
 }
 
-export async function GetPagedOffers(cutoffMinutes: number, account: string, contract: string, limit: number, page: number): Promise<AtomicAssetsOffer[]> {
+export async function GetPagedOffers(cutoffMinutes: number, account: string, states: number[], contract: string, limit: number, page: number): Promise<AtomicAssetsOffer[]> {
     // Construct the query URL
     const cutoffTime = sub(new Date(), { minutes: cutoffMinutes }).getTime();
     const queryParams = new URLSearchParams({
         recipient: contract,
         account,
         sender: account,
-        state: '0,1,2',
+        state: states.join(','),
         before: cutoffTime.toString(),
         page: page.toString(),
         limit: limit.toString(),
@@ -64,7 +64,7 @@ export async function GetPagedOffers(cutoffMinutes: number, account: string, con
     }
 }
 
-export async function GetAllOffers(cutoffMinutes: number, account: string, contract: string): Promise<AtomicAssetsOffer[]> {
+export async function GetAllOffers(cutoffMinutes: number, account: string, states: number[], contract: string): Promise<AtomicAssetsOffer[]> {
     const limit = 100;
 
     let page = 1;
@@ -72,7 +72,7 @@ export async function GetAllOffers(cutoffMinutes: number, account: string, contr
 
     while (true) {
         // Keep fetching more pages until nothing is returned, AtomicAssets API doesn't provide an indicative count.
-        const offersPage = await GetPagedOffers(cutoffMinutes, account, contract, limit, page);
+        const offersPage = await GetPagedOffers(cutoffMinutes, account, states, contract, limit, page);
 
         if (offersPage.length == 0) {
             // We have no more pages, exit the loop and return the array.

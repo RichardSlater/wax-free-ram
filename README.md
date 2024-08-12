@@ -27,7 +27,7 @@ docker build . -t wax-ram-free:latest
 docker run --publish 4321:4321 localhost/wax-ram-free
 ```
 
-## Test-Buikd
+## Test Build
 
 ```
 pnp run astro build

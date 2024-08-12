@@ -35,6 +35,10 @@ import Layout from "../layouts/Layout.astro";
       </p>
     </div>
 
+    <div class="content state-loading center hidden">
+      <h2 class="animated">Loading...</h2>
+    </div>
+
     <div class="content state-freeRam hidden">
       <h2><span class="text-gradient">free</span> your RAM!</h2>
       <p>
@@ -168,6 +172,28 @@ import Layout from "../layouts/Layout.astro";
   #estRam {
     font-weight: 700;
   }
+  h2.animated {
+    background: radial-gradient(
+      circle at 100%,
+      rgb(var(--accent)),
+      rgb(var(--accent-light)) 50%,
+      #fff 75%,
+      rgb(var(--accent)) 75%
+    );
+    font-weight: 600;
+    background-size: 200% auto;
+    color: #000;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: animatedTextGradient 1.5s linear infinite reverse;
+  }
+
+  @keyframes animatedTextGradient {
+    to {
+      background-position: 200% center;
+    }
+  }
+
   :global(a.offer-link),
   :global(a.transaction-link) {
     color: rgb(var(--accent-light));

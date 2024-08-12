@@ -6,6 +6,7 @@ import { WalletPluginCloudWallet } from "@wharfkit/wallet-plugin-cloudwallet";
 import { GetAllOffers, type AtomicAssetsOffer } from "./atomic-assets-client";
 
 const webRenderer = new WebRenderer();
+const testMode = import.meta.env.DEV;
 
 const sessionKit = new SessionKit({
   appName: "WAX RAM Free",
@@ -39,8 +40,11 @@ async function onConnectClicked() {
     let offers: AtomicAssetsOffer[];
     const account = session.actor.toString();
 
+    updateTransientState("loading");
+
     try {
-      offers = await GetAllOffers(60, account, "warsaken");
+      let states = testMode ? [ 0, 1, 2, 3 ] : [ 0, 1, 2 ];
+      offers = await GetAllOffers(60, account, states, "warsaken");
     } catch (error) {
       updateTransientState("error");
       document.getElementById("errors")!.innerText = getErrorMessage(error);
@@ -50,8 +54,6 @@ async function onConnectClicked() {
     if (offers.length == 0) {
       updateTransientState("nothingTodo");
     } else {
-      updateTransientState("freeRam");
-
       const offersList = document.getElementById("offers");
       const offersListItems = generateOfferElements(offers);
       document.getElementById("countOffers")!.innerText = offers.length.toString();
@@ -61,8 +63,9 @@ async function onConnectClicked() {
       offersListItems.forEach((o) => offersList?.appendChild(o));
 
       document
-        .querySelector(".freeRamButton")
-        ?.addEventListener("click", async _ => { onFreeRamClicked(offers, session) });
+        .querySelectorAll(".freeRamButton").forEach((b) => b.addEventListener("click", async _ => { onFreeRamClicked(offers, session) }));
+
+      updateTransientState("freeRam");
     }
   }
 }
@@ -109,6 +112,7 @@ function getErrorMessage(error: unknown) {
 }
 
 function updateTransientState(state: string) {
+  console.log(state);
   document
     .querySelectorAll("div.content")
     .forEach((d) => {
