@@ -36,8 +36,8 @@ importers:
         specifier: ^1.3.1
         version: 1.3.1(@wharfkit/session@1.3.1)
       '@wharfkit/web-renderer':
-        specifier: ^1.2.5
-        version: 1.2.5(@wharfkit/session@1.3.1)
+        specifier: ^1.4.0
+        version: 1.4.0(@wharfkit/session@1.3.1)
       astro:
         specifier: ^4.13.3
         version: 4.13.3(typescript@5.5.4)
@@ -697,8 +697,8 @@ packages:
     peerDependencies:
       '@wharfkit/session': ^1.2.2
 
-  '@wharfkit/web-renderer@1.2.5':
-    resolution: {integrity: sha512-aAD7Sl+6aAx1hDRqP+rSxKrINqZvN1ernqGFrTKbJZ+miy6V0wz2bW8pffjHLTENU8T7KHmq9DkMuQmRE7t7uQ==}
+  '@wharfkit/web-renderer@1.4.0':
+    resolution: {integrity: sha512-vYjnIDIeDk9VMchxCDAmDDEzaWQQ8nvoU41JFUKUclPQj1Ve4sOV+bO8Wpv7nHbNA3NQt4OqLoXDDyZw+JRBeQ==}
     peerDependencies:
       '@wharfkit/session': ^1.0.1
 
@@ -2800,7 +2800,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@wharfkit/web-renderer@1.2.5(@wharfkit/session@1.3.1)':
+  '@wharfkit/web-renderer@1.4.0(@wharfkit/session@1.3.1)':
     dependencies:
       '@wharfkit/session': 1.3.1
 
