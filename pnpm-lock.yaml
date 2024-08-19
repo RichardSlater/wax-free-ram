@@ -15,11 +15,11 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0
       '@wharfkit/antelope':
-        specifier: ^1.0.10
-        version: 1.0.10
+        specifier: ^1.0.12
+        version: 1.0.12
       '@wharfkit/common':
         specifier: ^1.2.2
-        version: 1.2.2(@wharfkit/antelope@1.0.10)
+        version: 1.2.2(@wharfkit/antelope@1.0.12)
       '@wharfkit/contract':
         specifier: ^1.1.5
         version: 1.1.5
@@ -648,8 +648,8 @@ packages:
   '@wharfkit/account@1.2.0':
     resolution: {integrity: sha512-mO+FJEJVGJA3qEBD3LQmF0br157tva66jOwhB7E6UZZwuniXromkV51TKGWJ6hbi6HDwwiA1eSGWyQ6RDTQrSA==}
 
-  '@wharfkit/antelope@1.0.10':
-    resolution: {integrity: sha512-12m4nD6+ZZl+mwzySuFkeiJCOrbXQT6mqg9amr1l/JtRewRdxeN9QTsEoPjE5MCTXbJc84X51KCT71ysglse0Q==}
+  '@wharfkit/antelope@1.0.12':
+    resolution: {integrity: sha512-Iuqog3rgnW+o8S+Etw5mMto14e1RILIDnRfZAvRS1DOVFgAma6Vv+rT9rJpJq7ldvTBdZu35BImkfwl0iDJCVw==}
 
   '@wharfkit/common@1.2.2':
     resolution: {integrity: sha512-VdhSBlAd2zU4fzvlB5CKje75SfFAD3zbj0n7uxAa8bjclXyRCjyvRzxCXSKb5WbKMiQ8EN3kS2iLAhSBy4TJxw==}
@@ -2689,21 +2689,21 @@ snapshots:
 
   '@wharfkit/abicache@1.2.2':
     dependencies:
-      '@wharfkit/antelope': 1.0.10
+      '@wharfkit/antelope': 1.0.12
       '@wharfkit/signing-request': 3.2.0
       pako: 2.1.0
       tslib: 2.6.3
 
   '@wharfkit/account@1.2.0':
     dependencies:
-      '@wharfkit/antelope': 1.0.10
-      '@wharfkit/common': 1.2.2(@wharfkit/antelope@1.0.10)
+      '@wharfkit/antelope': 1.0.12
+      '@wharfkit/common': 1.2.2(@wharfkit/antelope@1.0.12)
       '@wharfkit/contract': 1.1.5
       '@wharfkit/resources': 1.2.3
       '@wharfkit/token': 1.1.2
       tslib: 2.6.3
 
-  '@wharfkit/antelope@1.0.10':
+  '@wharfkit/antelope@1.0.12':
     dependencies:
       bn.js: 4.12.0
       brorand: 1.1.0
@@ -2712,23 +2712,23 @@ snapshots:
       pako: 2.1.0
       tslib: 2.6.3
 
-  '@wharfkit/common@1.2.2(@wharfkit/antelope@1.0.10)':
+  '@wharfkit/common@1.2.2(@wharfkit/antelope@1.0.12)':
     dependencies:
-      '@wharfkit/antelope': 1.0.10
+      '@wharfkit/antelope': 1.0.12
       tslib: 2.6.3
 
   '@wharfkit/contract@1.1.5':
     dependencies:
       '@wharfkit/abicache': 1.2.2
-      '@wharfkit/antelope': 1.0.10
+      '@wharfkit/antelope': 1.0.12
       '@wharfkit/signing-request': 3.2.0
       tslib: 2.6.3
 
-  '@wharfkit/protocol-esr@1.3.2(@wharfkit/antelope@1.0.10)(@wharfkit/session@1.3.1)':
+  '@wharfkit/protocol-esr@1.3.2(@wharfkit/antelope@1.0.12)(@wharfkit/session@1.3.1)':
     dependencies:
       '@greymass/buoy': 1.0.4
       '@greymass/miniaes': 1.0.0
-      '@wharfkit/antelope': 1.0.10
+      '@wharfkit/antelope': 1.0.12
       '@wharfkit/session': 1.3.1
       isomorphic-ws: 5.0.0(ws@8.18.0)
       ws: 8.18.0
@@ -2748,7 +2748,7 @@ snapshots:
 
   '@wharfkit/resources@1.2.3':
     dependencies:
-      '@wharfkit/antelope': 1.0.10
+      '@wharfkit/antelope': 1.0.12
       bn.js: 4.12.0
       js-big-decimal: 2.0.7
       tslib: 2.6.3
@@ -2757,28 +2757,28 @@ snapshots:
     dependencies:
       '@wharfkit/abicache': 1.2.2
       '@wharfkit/account': 1.2.0
-      '@wharfkit/antelope': 1.0.10
-      '@wharfkit/common': 1.2.2(@wharfkit/antelope@1.0.10)
+      '@wharfkit/antelope': 1.0.12
+      '@wharfkit/common': 1.2.2(@wharfkit/antelope@1.0.12)
       '@wharfkit/signing-request': 3.2.0
       pako: 2.1.0
       tslib: 2.6.3
 
   '@wharfkit/signing-request@3.2.0':
     dependencies:
-      '@wharfkit/antelope': 1.0.10
+      '@wharfkit/antelope': 1.0.12
       tslib: 2.6.3
 
   '@wharfkit/token@1.1.2':
     dependencies:
-      '@wharfkit/antelope': 1.0.10
+      '@wharfkit/antelope': 1.0.12
       '@wharfkit/contract': 1.1.5
       bn.js: 4.12.0
       tslib: 2.6.3
 
   '@wharfkit/wallet-plugin-anchor@1.4.0(@wharfkit/session@1.3.1)':
     dependencies:
-      '@wharfkit/antelope': 1.0.10
-      '@wharfkit/protocol-esr': 1.3.2(@wharfkit/antelope@1.0.10)(@wharfkit/session@1.3.1)
+      '@wharfkit/antelope': 1.0.12
+      '@wharfkit/protocol-esr': 1.3.2(@wharfkit/antelope@1.0.12)(@wharfkit/session@1.3.1)
       '@wharfkit/session': 1.3.1
       isomorphic-ws: 5.0.0(ws@8.18.0)
       ws: 8.18.0
